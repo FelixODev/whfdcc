@@ -25,3 +25,8 @@
 #container a {
   text-decoration: none;
 }
+
+ion-item {
+  border-radius: 5px 5px 5px 5px;
+  --min-height: 58px;
+}

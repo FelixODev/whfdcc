@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  cList:any[]= [
+    {aisle: "Frozen", start:"", stop:"", count: 0}
+  ];
+
   constructor() {}
 
 }
