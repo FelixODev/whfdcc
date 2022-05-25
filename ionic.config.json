@@ -1,0 +1,7 @@
+{
+  "name": "whfdcc",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
