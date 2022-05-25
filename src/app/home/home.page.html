@@ -2,7 +2,8 @@
   <ion-toolbar>
     <ion-title>
       <h1>
-        Blank
+        <ion-img style="height: 32px; display: inline-flex;" src="assets/icon/favicon.png"></ion-img>
+        Grocery Case Counts
       </h1>
     </ion-title>
   </ion-toolbar>
@@ -14,25 +15,27 @@
       <ion-col>
         <ion-item color="light" lines="none">
           <ion-label position="stacked">aisle</ion-label>
-          <ion-input [(ngModel)]="c.aisle"></ion-input>
+          <ion-select [(ngModel)]="c.aisle" [placeholder]="this.as[0]" okText="Okay" cancelText="Dismiss">
+            <ion-select-option *ngFor="let a of this.as" [value]="a">{{a}}</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
-      <ion-col>
+      <ion-col (click)="c.start = setTime(c.start)">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">start</ion-label>
-          <ion-input type="time"></ion-input>
+          <ion-input [(ngModel)]="c.start" type="time"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
-        <ion-item color="light" lines="none">
+        <ion-item color="light" lines="none" (click)="c.stop = setTime(c.stop)">
           <ion-label position="stacked">stop</ion-label>
-          <ion-input type="time"></ion-input>
+          <ion-input [(ngModel)]="c.stop" type="time"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item color="light" lines="none">
           <ion-label position="stacked">case count</ion-label>
-          <ion-input type="number" inputmode="number"></ion-input>
+          <ion-input type="number" inputmode="number" placeholder="0"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -42,7 +45,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="add()">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-buttons>

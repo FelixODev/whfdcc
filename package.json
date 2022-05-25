@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ionic build --prod && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
