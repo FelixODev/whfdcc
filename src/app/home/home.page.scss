@@ -35,6 +35,10 @@ ion-item {
 
 ion-row {
   margin-bottom: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
   border-bottom: 1px solid var(--ion-color-light);
+}
+
+ion-col > ion-item > ion-text {
+  margin-bottom: 5px;
 }

@@ -38,18 +38,18 @@
           <ion-input [(ngModel)]="c.count" type="number" inputmode="number" placeholder="0"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col size="5">
+      <ion-col size="4.5">
         <ion-item color="none" lines="none">
           <ion-label position="stacked">elapsed time</ion-label>
-          <ion-text style="margin-bottom: 3px;">
+          <ion-text>
             {{et(c)}} (min)
           </ion-text>
         </ion-item>
       </ion-col>
-      <ion-col size="4">
+      <ion-col size="4.5">
         <ion-item color="none" lines="none">
           <ion-label position="stacked">cph</ion-label>
-          <ion-text style="margin-bottom: 3px;">
+          <ion-text>
             {{cph(c)}}/h
           </ion-text>
         </ion-item>
@@ -60,6 +60,26 @@
           <ion-button fill="clear">
             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
           </ion-button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4.5">
+        <ion-item color="none" lines="none">
+          <ion-label position="stacked">shift et</ion-label>
+          <ion-text>{{set()}}</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col size="4.5">
+        <ion-item color="none" lines="none">
+          <ion-label position="stacked">shift cph</ion-label>
+          <ion-text>{{scph()}}/h</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item color="none" lines="none">
+          <ion-label></ion-label>
+          <ion-text></ion-text>
         </ion-item>
       </ion-col>
     </ion-row>

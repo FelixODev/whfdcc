@@ -53,7 +53,24 @@ export class HomePage {
     if(!c.start||!c.stop||!c.count)
       return 0
     const t = (+this.et(c)/60)
-    return Math.round(c.count/((t<1)?1:t))
+    return Math.round(c.count/((t<0.01)?1:t))
+  }
+
+  set() {
+    let t = 0;
+    for(let c of this.cList) {
+      t = +this.et(c)+t
+    }
+    return t
+  }
+
+  scph() {
+    let ct = 0;
+    for(let c of this.cList) {
+      ct = +(c.count||0)+ct
+    }
+    const t = (+this.set()/60)
+    return Math.round(ct/((t<0.01)?1:t))
   }
 
   refresh(){
