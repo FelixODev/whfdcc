@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let c of cList">
+    <ion-row *ngFor="let c of cList" style="margin-bottom: 15px;">
       <ion-col size="12">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">aisle</ion-label>
@@ -42,12 +42,17 @@
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button (click)="add()">
-        <ion-icon name="add"></ion-icon>
+      <ion-button>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="add()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
