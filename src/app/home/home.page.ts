@@ -46,14 +46,14 @@ export class HomePage {
     if(!c.start||!c.stop)
       return 0
       const t = tm(c.stop)-tm(c.start)
-    return (t>0)?t:+t+1440
+    return (t<0)?+t+1440:t
   }
 
   cph(c) {
     if(!c.start||!c.stop||!c.count)
       return 0
-    return c.count
-    // /(+this.et(c)/60)
+    const t = (+this.et(c)/60)
+    return Math.round(c.count/((t<1)?1:t))
   }
 
   refresh(){
