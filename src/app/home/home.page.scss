@@ -29,4 +29,12 @@
 ion-item {
   border-radius: 5px 5px 5px 5px;
   --min-height: 58px;
+  // --highlight-height: -5;
+  // --color: var(--ion-color-light);
+}
+
+ion-row {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ion-color-light);
 }

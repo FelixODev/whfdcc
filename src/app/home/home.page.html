@@ -1,6 +1,6 @@
 <ion-header [translucent]="true"  class="ion-no-border">
   <!-- <ion-toolbar> -->
-    <ion-title>
+    <ion-title (click)="refresh();">
       <h1>
         <ion-img style="height: 32px; display: inline-flex;" src="assets/icon/favicon.png"></ion-img>
         WF Case Counts
@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let c of cList" style="margin-bottom: 15px;">
+    <ion-row *ngFor="let c of cList">
       <ion-col size="12">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">aisle</ion-label>
@@ -23,13 +23,13 @@
       <ion-col size="4.5" (click)="c.start = setTime(c.start)">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">start</ion-label>
-          <ion-input [(ngModel)]="c.start" type="time" [disabled]="!c.start"></ion-input>
+          <ion-input [(ngModel)]="c.start" type="time" [disabled]="c.start==null||undefined"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="4.5" (click)="c.stop = setTime(c.stop)">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">stop</ion-label>
-          <ion-input [(ngModel)]="c.stop" type="time" [disabled]="!c.stop"></ion-input>
+          <ion-input [(ngModel)]="c.stop" type="time" [disabled]="c.stop==null||undefined"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col size="3">
@@ -38,8 +38,33 @@
           <ion-input type="number" inputmode="number" placeholder="0"></ion-input>
         </ion-item>
       </ion-col>
+      <ion-col size="4.5">
+        <ion-item color="none" lines="none">
+          <ion-label position="stacked">elapsed time</ion-label>
+          <!-- <ion-chip color="none"> -->
+            {{'0'}} (min)
+          <!-- </ion-chip> -->
+        </ion-item>
+      </ion-col>
+      <ion-col size="4.5">
+        <ion-item color="none" lines="none">
+          <ion-label position="stacked">cph</ion-label>
+          <!-- <ion-chip color="none"> -->
+            {{'0'}}/h
+          <!-- </ion-chip> -->
+        </ion-item>
+      </ion-col>
+      <ion-col size="3">
+        <ion-item color="none" lines="none">
+          <ion-label position="stacked">action</ion-label>
+          <ion-button fill="clear">
+            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-col>
     </ion-row>
   </ion-grid>
+  <div style="height: 60px;"></div>
 </ion-content>
 
 <!-- <ion-footer>

@@ -37,4 +37,8 @@ export class HomePage {
     return (new Date().toLocaleTimeString('en-GB')).slice(0, -3);
   }
 
+  refresh(){
+    window.location.reload();
+  }
+
 }
