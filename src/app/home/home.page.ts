@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { App } from '@capacitor/app';
 
 export const aisles = [
   'Frozen','Cold Box','Soup Bar','Cookie',
@@ -46,7 +47,15 @@ export class HomePage {
   constructor(
     public alert: AlertController
   ) {
-    this.init().then().catch()
+    // this.plt.ready().
+    // this.init().then().catch()
+    App.addListener('appStateChange', ({ isActive }) => {
+    // console.log('App state changed. Is active?', isActive);
+    if (isActive) {
+    } else {
+      // this.persist().then().catch();
+    }
+  });
   }
 
   async init() {
@@ -58,12 +67,7 @@ export class HomePage {
     }
   }
 
-  async refresh(){
-    await this.deInit();
-    window.location.reload();
-  }
-
-  async deInit() {
+  async persist() {
     const u = {[this.cWork.date]: true};
     this.dates = (this.dates)?{...this.dates,...u}:u;
     wl.setItem('dates', JSON.stringify(this.dates));
@@ -73,6 +77,10 @@ export class HomePage {
         this.cWork
       )
     );
+  }
+
+  async refresh(){
+    window.location.reload();
   }
 
   add() {
