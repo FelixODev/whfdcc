@@ -33,12 +33,27 @@ ion-item {
   // --color: var(--ion-color-light);
 }
 
+ion-grid {
+  padding: 0px;
+}
+
 ion-row {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--ion-color-light);
+  padding: 10px 5px;
+  border-bottom: 5px solid var(--ion-color-light);
 }
 
 ion-col > ion-item > ion-text {
   margin-bottom: 5px;
+}
+
+.display {
+  padding: 15px 5px;
+  background: var(--ion-color-primary);
+  ion-label, ion-text {
+    color: white;
+    font-weight: 700;
+  }
+  span {
+    font-size: xx-large;
+  }
 }

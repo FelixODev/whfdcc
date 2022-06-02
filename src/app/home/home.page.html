@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let c of cList">
+    <ion-row *ngFor="let c of cList; let i = index;">
       <ion-col size="12">
         <ion-item color="light" lines="none">
           <ion-label position="stacked">aisle</ion-label>
@@ -57,34 +57,34 @@
       <ion-col size="3">
         <ion-item color="none" lines="none">
           <ion-label position="stacked">action</ion-label>
-          <ion-button fill="clear" color="new">
-            <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-button fill="clear" (click)="confirm('delete',i)">
+            <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row class="display">
       <ion-col size="4.5">
         <ion-item color="none" lines="none">
           <ion-label position="stacked">shift et</ion-label>
-          <ion-text>{{set()}} (min)</ion-text>
+          <ion-text><span>{{set()}}</span> (min)</ion-text>
         </ion-item>
       </ion-col>
       <ion-col size="4.5">
         <ion-item color="none" lines="none">
           <ion-label position="stacked">shift cph</ion-label>
-          <ion-text>{{scph()}}/h</ion-text>
+          <ion-text><span>{{scph()}}</span>/h</ion-text>
         </ion-item>
       </ion-col>
       <ion-col size="3">
         <ion-item color="none" lines="none">
-          <ion-label></ion-label>
-          <ion-text></ion-text>
+          <ion-label position="stacked">shift count</ion-label>
+          <ion-text><span>{{ttc}}</span></ion-text>
         </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div style="height: 60px;"></div>
+  <div style="height: 65px;"></div>
 </ion-content>
 
 <!-- <ion-footer>
@@ -97,7 +97,7 @@
 </ion-footer> -->
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="add()" color="new">
+  <ion-fab-button (click)="add()">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

@@ -53,7 +53,8 @@ export class HomePage {
     const d = td().split("-");
     this.dates = JSON.parse(wl.getItem(`${d[0]}${d[1]}`));
     // await this.show(JSON.stringify(this.dates));
-    this.cList = this.dates[td()];
+    if (this.dates[td()])
+      this.cList = this.dates[td()];
   }
 
   async persist() {
@@ -110,20 +111,47 @@ export class HomePage {
     for(let c of this.cList) {
       ct = +(c.count||0)+ct
     }
+    this.ttc = ct;
     const t = (+this.set()/60)
     return Math.round(ct/((t<0.01)?1:t))
+  }
+
+  ttc:number = 0;
+
+  delete(i) {
+    this.cList.splice(i,1);
   }
 
   async show(m) {
     console.log(m);
     const a = await this.alert.create({
-      message: m,
+      message: JSON.stringify(m),
       buttons: [{
         text: 'Ok',
         role: 'dismiss'
       }]
     });
     await a.present();
+  }
+
+  async confirm(func:string, param:any){
+    const a = await this.alert.create({
+      message: `Would you like to ${func}?`,
+      buttons: [
+        {
+          text: 'Confirm',
+          role: 'submit',
+        },
+        {
+          text: 'Dismiss',
+          role: 'cancel'
+        }
+      ]
+    });
+    await a.present();
+    const r = await a.onDidDismiss();
+    if(r.role === 'submit')
+      this[func](param);
   }
 
 }
