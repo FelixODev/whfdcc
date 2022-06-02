@@ -3,8 +3,8 @@ import { AlertController } from '@ionic/angular';
 import { App } from '@capacitor/app';
 
 export const aisles = [
-  'Frozen','Cold Box','Soup Bar','Cookie',
-  'Perimeter', 'Baby','Drinks','Baking','International',
+  'Frozen','Cold Box','Soup Bar','Cookie', 'Perimeter',
+  'Baby','Drinks','Baking','International',
   'Chips','Bulk','Register', 'Other'
 ];
 
@@ -33,7 +33,7 @@ const wl = window.localStorage;
 })
 export class HomePage {
   as:string[] = aisles;
-  dates: any = {[td()]:true};
+  dates: any;
   cList:Cw[]= [
     <Cw>{}
   ];
@@ -52,8 +52,8 @@ export class HomePage {
   async init() {
     const d = td().split("-");
     this.dates = JSON.parse(wl.getItem(`${d[0]}${d[1]}`));
-    return await this.show(JSON.stringify(this.dates[td()]));
-    this.cList = this.dates[td()]||this.cList;
+    // await this.show(JSON.stringify(this.dates));
+    this.cList = this.dates[td()];
   }
 
   async persist() {
@@ -64,10 +64,11 @@ export class HomePage {
     const ds = JSON.stringify(this.dates);
     
     wl.setItem(`${d[0]}${d[1]}`, ds);
-    return await this.show(wl.getItem(`${d[0]}${d[1]}`));
+    // return await this.show(wl.getItem(`${d[0]}${d[1]}`));
   }
 
   async refresh(){
+    await this.persist();
     window.location.reload();
   }
 
