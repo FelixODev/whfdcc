@@ -4,28 +4,23 @@ import { App } from '@capacitor/app';
 
 export const aisles = [
   'Frozen','Cold Box','Soup Bar','Cookie',
-  'Detergent','Drinks','Baking','International',
-  'Chips','Bulk','Register'
+  'Perimeter', 'Baby','Drinks','Baking','International',
+  'Chips','Bulk','Register', 'Other'
 ];
 
-interface Ca {
+interface Cw {
   aisle: typeof aisles[number];
   start: Date;
   stop: Date;
   count: number|0;
 };
 
-interface Cw {
-  date?: string;
-  aisles?: Ca[];
-}
-
 const tm = (t) => {
   const m = t.split(":");
   return m[0]*60+(+m[1])
 }
 
-const dt = () => {
+const td = () => {
   return ((new Date()).toISOString().split('T'))[0];
 }
 
@@ -38,45 +33,38 @@ const wl = window.localStorage;
 })
 export class HomePage {
   as:string[] = aisles;
-  dates: any = {[dt()]:true};
-  cWork:Cw = <Cw>{date:dt(),aisles:<Ca[]>[]};
-  cList:Ca[]= [
-    <Ca>{}
+  dates: any = {[td()]:true};
+  cList:Cw[]= [
+    <Cw>{}
   ];
 
   constructor(
     public alert: AlertController
   ) {
-    // this.plt.ready().
-    // this.init().then().catch()
+    this.init().then().catch();
     App.addListener('appStateChange', ({ isActive }) => {
-    // console.log('App state changed. Is active?', isActive);
-    if (isActive) {
-    } else {
-      // this.persist().then().catch();
-    }
-  });
+      if (isActive)
+        return
+      this.persist().then().catch();
+    });
   }
 
   async init() {
-    this.dates = JSON.parse(wl.getItem('dates'));
-    const cw = wl.getItem(dt());
-    if(cw){
-      this.cWork = JSON.parse(cw);
-      this.cList = this.cWork.aisles;
-    }
+    const d = td().split("-");
+    this.dates = JSON.parse(wl.getItem(`${d[0]}${d[1]}`));
+    return await this.show(JSON.stringify(this.dates[td()]));
+    this.cList = this.dates[td()]||this.cList;
   }
 
   async persist() {
-    const u = {[this.cWork.date]: true};
+    const d = td().split("-");
+    const u = {[td()]: this.cList};
+    
     this.dates = (this.dates)?{...this.dates,...u}:u;
-    wl.setItem('dates', JSON.stringify(this.dates));
-    this.cWork.aisles = this.cList;
-    wl.setItem(this.cWork.date,
-      JSON.stringify(
-        this.cWork
-      )
-    );
+    const ds = JSON.stringify(this.dates);
+    
+    wl.setItem(`${d[0]}${d[1]}`, ds);
+    return await this.show(wl.getItem(`${d[0]}${d[1]}`));
   }
 
   async refresh(){
@@ -84,7 +72,7 @@ export class HomePage {
   }
 
   add() {
-    this.cList.push(<Ca>{});
+    this.cList.push(<Cw>{});
   }
 
   setTime(prop) {
