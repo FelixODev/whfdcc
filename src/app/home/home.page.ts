@@ -139,12 +139,12 @@ export class HomePage {
       message: `Would you like to ${func}?`,
       buttons: [
         {
-          text: 'Confirm',
-          role: 'submit',
-        },
-        {
           text: 'Dismiss',
           role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          role: 'submit',
         }
       ]
     });
